@@ -1,18 +1,16 @@
 import json
-from config import DB_URI
+from config import user, password, db_name
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
 
 from models import create_tables, Publisher, Book, Stock, Shop, Sale
 
-DSN = DB_URI
+DSN = f'postgresql://{user}:{password}@localhost:5432/{db_name}'
 engine = sqlalchemy.create_engine(DSN)
-
 create_tables(engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
-
 
 with open('fixtures/tests_data.json', 'r') as fd:
     data = json.load(fd)
@@ -35,13 +33,6 @@ def shop_query():
             filter(Publisher.name == c).all():
         print(f'Shop name: {shop_name}')
 
-    # d = input('Enter publisher id: ')
-    # subq = session.query(Book).filter(Book.id_publisher == d).subquery()
-    # for j in session.query(Publisher).join(subq, Publisher.id == subq.c.id_publisher):
-    #     print(f'Publisher: {j.name}')
-
 
 shop_query()
-
-
 session.close()
