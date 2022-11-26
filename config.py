@@ -3,4 +3,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-DB_URI = os.getenv('DB_URI')
+host = os.getenv('host')
+user = os.getenv('user')
+password = os.getenv('password')
+db_name = os.getenv('db_name')
+
