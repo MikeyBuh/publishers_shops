@@ -1,10 +1,10 @@
 import json
-from config import host, user, password, db_name
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
+from config import host, user, password, db_name, port
 from models import create_tables, Publisher, Book, Stock, Shop, Sale
 
-DSN = f'postgresql://{user}:{password}@{host}:5432/{db_name}'
+DSN = f'postgresql://{user}:{password}@{host}:{port}/{db_name}'
 
 engine = sqlalchemy.create_engine(DSN)
 create_tables(engine)
