@@ -31,7 +31,7 @@ def shop_query():
     c = input('Enter publisher name: ')
     for shop_name in session.query(Shop.name).join(Stock).join(Sale).join(Book).join(Publisher).\
             filter(Publisher.name == c).all():
-        print(f'Shop name: {shop_name}')
+        print('Shop name: {}'.format(*shop_name))
 
 
 shop_query()
