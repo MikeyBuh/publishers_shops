@@ -28,10 +28,16 @@ for record in data:
 
 
 def shop_query():
-    c = input('Enter publisher name: ')
-    for shop_name in session.query(Shop.name).join(Stock).join(Sale).join(Book).join(Publisher).\
-            filter(Publisher.name == c).all():
-        print('Shop name: {}'.format(*shop_name))
+    try:
+        c = input('Enter publisher name or id: ')
+        for shop_name in session.query(Shop.name).join(Stock).join(Sale).join(Book).join(Publisher).\
+                filter(Publisher.name == c).all():
+            print('Shop name: {}'.format(*shop_name))
+        for shop_name in session.query(Shop.name).join(Stock).join(Sale).join(Book).join(Publisher). \
+                filter(Publisher.id == c).all():
+            print('Shop name: {}'.format(*shop_name))
+    except (Exception, psycopg2.Error) as error:
+        return error
 
 
 shop_query()
