@@ -1,2 +1,2 @@
 # publishers_shops
- ORM
+ SQLAlchemy ORM
